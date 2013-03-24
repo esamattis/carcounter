@@ -1,11 +1,11 @@
 
-var Graph = require("./graph");
+var GraphView = require("./graph_view");
 
 function toggleGraphFor(collection, container) {
   var graph = null;
   return function () {
     if (!graph) {
-      graph = new Graph({
+      graph = new GraphView({
         collection: collection
       });
       container.html(graph.el);

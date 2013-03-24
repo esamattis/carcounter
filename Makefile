@@ -7,7 +7,7 @@ browserify:
 	mkdir -p bundle
 	browserify -d -t hbsfy \
 		-x ./scripts/toggle_graph.js \
-		-x ./scripts/graph.js \
+		-x ./scripts/graph_view.js \
 		-x ./scripts/vendor/flotr2.js \
 		./scripts/index.js > bundle/index.js
 	browserify -d -t hbsfy -r ./scripts/toggle_graph.js > bundle/toggle_graph.js

@@ -6,7 +6,7 @@ var Flotr = window.Flotr;
 
 console.log("WE HAVE FLOTR", Flotr);
 
-var Graph = Backbone.View.extend({
+var GraphView = Backbone.View.extend({
 
   constructor: function() {
     Backbone.View.prototype.constructor.apply(this, arguments);
@@ -47,4 +47,4 @@ var Graph = Backbone.View.extend({
 });
 
 
-module.exports = Graph;
+module.exports = GraphView;
