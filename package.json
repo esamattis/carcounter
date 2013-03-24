@@ -1,0 +1,26 @@
+{
+  "name": "cssfy",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/epeli/node-cssfy"
+  },
+  "keywords": [
+    "browserify"
+  ],
+  "author": "Esa-Matti Suuronen",
+  "license": "MIT",
+  "dependencies": {
+    "browserify": "~2.7.3",
+    "through": "~2.2.7",
+    "backbone": "~1.0.0",
+    "handlebars-runtime": "~1.0.0",
+    "hbsfy": "~0.1.1",
+    "uglify-js": "~2.2.5"
+  }
+}
