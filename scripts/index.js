@@ -1,33 +1,16 @@
 
-require("./vendor/zepto.js");
-var $ = window.Zepto;
-
-var Backbone = require("backbone");
-var CounterView = require("./counter_view");
 var loadScript = require("./load_script");
 
+window.USE_ZEPTO = !!document.querySelectorAll;
 
-function main() {
-  var collection = new Backbone.Collection();
-  var counter = new CounterView({
-    collection: collection
-  });
+if (window.USE_ZEPTO) loadScript("bundle/main-zepto.js", start);
+else loadScript("bundle/main-jquery.js", start);
 
-  $(".counter-container").html(counter.el);
-  counter.render();
-
-  counter.once("display:graph", function() {
-
-    loadScript("bundle/toggle_graph.js", function(err) {
-      if (err) throw err;
-      var toggleGraphFor = require("./toggle_graph");
-      var toggler = toggleGraphFor(collection, $(".graph-container"));
-      toggler();
-      counter.on("display:graph", toggler);
-
-    });
-  });
-
+function start() {
+  setTimeout(function() {
+    var main = require("./main");
+    main();
+  
+  }, 1000);
 }
 
-$(main);
