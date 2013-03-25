@@ -4,8 +4,6 @@ var Backbone = require("backbone");
 require("./vendor/flotr2");
 var Flotr = window.Flotr;
 
-console.log("WE HAVE FLOTR", Flotr);
-
 var GraphView = Backbone.View.extend({
 
   constructor: function() {
