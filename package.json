@@ -19,6 +19,8 @@
     "browserify": "~2.7.3",
     "through": "~2.2.7",
     "backbone": "~1.0.0",
+    "underscore": "",
+    "scriptjs": "",
     "handlebars-runtime": "~1.0.0",
     "hbsfy": "~0.1.1",
     "uglify-js": "~2.2.5"

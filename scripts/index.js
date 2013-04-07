@@ -1,16 +1,7 @@
 
-var loadScript = require("./load_script");
+var $script = require("scriptjs").$script;
 
 window.USE_ZEPTO = !!document.querySelectorAll;
 
-if (window.USE_ZEPTO) loadScript("bundle/main-zepto.js", start);
-else loadScript("bundle/main-jquery.js", start);
-
-function start() {
-  setTimeout(function() {
-    var main = require("./main");
-    main();
-  
-  }, 1000);
-}
-
+if (window.USE_ZEPTO) $script("bundle/main-zepto.js");
+else $script("bundle/main-jquery.js");
