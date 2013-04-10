@@ -1,5 +1,5 @@
 
-var GraphView = require("./graph_view");
+var GraphView = require("./graph-view");
 
 function toggleGraphFor(collection, container) {
   var graph = null;

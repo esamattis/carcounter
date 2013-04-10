@@ -1,7 +1,7 @@
 
-var $ = require("./zepto_or_jquery");
+var $ = require("./jquery-or-zepto");
 var Backbone = require("backbone");
-var CounterView = require("./counter_view");
+var CounterView = require("./counter-view");
 var $script = require("scriptjs").$script;
 
 var collection = new Backbone.Collection();
@@ -12,14 +12,14 @@ var counter = new CounterView({
 $(".counter-container").html(counter.el);
 counter.render();
 
-counter.once("display:graph", function() {
+counter.once("toggle:graph", function() {
 
   $script("bundle/graph.js", function(err) {
     if (err) throw err;
-    var toggleGraphFor = require("./toggle_graph");
+    var toggleGraphFor = require("./toggle-graph");
     var toggler = toggleGraphFor(collection, $(".graph-container"));
     toggler();
-    counter.on("display:graph", toggler);
+    counter.on("toggle:graph", toggler);
   });
 });
 
