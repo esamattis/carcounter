@@ -13,13 +13,14 @@
   "author": "Esa-Matti Suuronen",
   "license": "MIT",
   "dependencies": {
-    "browserify": "~2.7.3",
+    "browserify": "~2.12.0",
     "through": "~2.2.7",
     "backbone": "~1.0.0",
-    "underscore": "",
-    "scriptjs": "",
+    "underscore": "~1.4.4",
+    "scriptjs": "~2.2.6",
     "handlebars-runtime": "~1.0.0",
     "hbsfy": "~0.1.1",
-    "uglify-js": "~2.2.5"
+    "uglify-js": "~2.2.5",
+    "browserify-externalize": ""
   }
 }

@@ -3,9 +3,20 @@
   <head>
     <title>Car Counter</title>
     <script src="bundle/index.js"></script>
+    <link type="text/css" rel="stylesheet" href="node_modules/rickshaw/src/css/graph.css">
   </head>
   <body>
     <div class=counter-container></div>
     <div class=graph-container></div>
+
+    <div id="chart_container">
+      <div id="chart"></div>
+      <div id="legend_container">
+        <div id="smoother" title="Smoothing"></div>
+        <div id="legend"></div>
+      </div>
+      <div id="slider"></div>
+    </div>
+
   </body>
 </html>

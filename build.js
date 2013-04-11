@@ -14,7 +14,12 @@ mainZepto.transform(require("hbsfy"));
 mainZepto.external("./scripts/vendor/jquery");
 mainJQuery.external("./scripts/vendor/zepto");
 
+mainZepto.require("./scripts/vendor/d3.shim", { expose: "d3" });
+mainJQuery.require("./scripts/vendor/d3.shim", { expose: "d3" });
+graph.require("./scripts/vendor/d3.shim", { expose: "d3" });
+
 externalize(mainZepto, graph, function(err) {
+    graph.bundle().pipe(fs.createWriteStream("bundle/graph.js"));
   if (err) throw err;
   externalize(mainJQuery, graph, function(err) {
     if (err) throw err;
