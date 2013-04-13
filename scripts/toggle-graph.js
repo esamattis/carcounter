@@ -1,6 +1,10 @@
 
 var GraphView = require("./graph-view");
 
+/**
+ * @param {Backbone.Collection} collection Data to render
+ * @param {jQuery/Zepto element} container Container to render graph on
+ **/
 function toggleGraphFor(collection, container) {
   var graph = null;
   return function () {

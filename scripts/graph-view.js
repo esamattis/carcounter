@@ -3,9 +3,7 @@ var $ = require("./jquery-or-zepto");
 var Backbone = require("backbone");
 var _ = require("underscore");
 var moment = require("moment");
-
 var Rickshaw = require("./vendor/rickshaw");
-
 
 var GraphView = Backbone.View.extend({
 
@@ -13,6 +11,8 @@ var GraphView = Backbone.View.extend({
     Backbone.View.prototype.constructor.apply(this, arguments);
     this.listenTo(this.collection, "add", this.render);
 
+    // We can use safely Function.prototype.bind here because we have loaded
+    // the shim if the browser did not implement it already
     this._rerender = _.debounce(this.render.bind(this) , 250);
     $(window).on("resize", this._rerender);
   },
