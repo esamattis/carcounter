@@ -39,8 +39,6 @@ var GraphView = Backbone.View.extend({
 
     var graph = new Rickshaw.Graph( {
       element: this.el,
-      width: $(window).width() - 50,
-      height: 500,
       renderer: 'line',
       series: [
         {
