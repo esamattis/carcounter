@@ -24,7 +24,7 @@ RESET="\033[0m"
 
 while true
 do
-  $COMMAND && {
+  sh -c "$COMMAND" && {
     echo -e "${GREEN}Build OK!${RESET}"
   } || {
     echo -e "${RED}Build broken!${RESET}"
