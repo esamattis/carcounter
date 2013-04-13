@@ -1,13 +1,10 @@
 
 export PATH := node_modules/.bin:$(PATH)
 
-all: dirs build
+all: build
 
 build:
 	node build.js
-
-dirs:
-	mkdir -p bundle
 
 min:
 	uglifyjs bundle/index.js -o bundle/index.js --mangle
