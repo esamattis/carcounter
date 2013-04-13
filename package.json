@@ -21,6 +21,7 @@
     "handlebars-runtime": "~1.0.0",
     "hbsfy": "~0.1.1",
     "uglify-js": "~2.2.5",
-    "browserify-externalize": ""
+    "browserify-externalize": "",
+    "moment": "~2.0.0"
   }
 }

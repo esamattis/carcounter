@@ -1,5 +1,8 @@
 
+var $ = require("./jquery-or-zepto");
 var Backbone = require("backbone");
+var _ = require("underscore");
+var moment = require("moment");
 
 var Rickshaw = require("./vendor/rickshaw");
 
@@ -13,8 +16,6 @@ var GraphView = Backbone.View.extend({
 
 
   render: function() {
-    // this.$el.width(800);
-    // this.$el.height(200);
 
     var data = [];
     var count = 0;
@@ -26,34 +27,46 @@ var GraphView = Backbone.View.extend({
       });
     });
 
-    if (!data.length) return;
+    if (!data.length) {
+      this.$el.html("no data!");
+      return;
+    }
+
     this.$el.empty();
 
     var graph = new Rickshaw.Graph( {
       element: this.el,
-      width: 960,
+      width: $(window).width() - 50,
       height: 500,
       renderer: 'line',
       series: [
         {
-          color: "#c05020",
+          color: "blue",
           data: data,
           name: 'Cars'
         }
       ]
     } );
 
+    var yAxis = new Rickshaw.Graph.Axis.Y({
+        graph: graph
+    });
+
+    var xAxis = new Rickshaw.Graph.Axis.X({
+        graph: graph,
+        tickFormat: function(data) {
+          return moment.unix(data/1000).format("hh:mm:ss a");
+        }
+    });
+
     graph.render();
+    yAxis.render();
+    xAxis.render();
+  },
 
-    var hoverDetail = new Rickshaw.Graph.HoverDetail( {
-      graph: graph
-    } );
-
-    var axes = new Rickshaw.Graph.Axis.Time( {
-      graph: graph
-    } );
-    axes.render();
-
+  remove: function() {
+    Backbone.View.prototype.remove.apply(this, arguments);
+    $(window).off("resize", this._rerender);
   }
 
 });
