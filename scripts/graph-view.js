@@ -12,6 +12,9 @@ var GraphView = Backbone.View.extend({
   constructor: function() {
     Backbone.View.prototype.constructor.apply(this, arguments);
     this.listenTo(this.collection, "add", this.render);
+
+    this._rerender = _.debounce(this.render.bind(this) , 250);
+    $(window).on("resize", this._rerender);
   },
 
 
