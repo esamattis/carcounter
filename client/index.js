@@ -1,5 +1,7 @@
 // Preloading entry point for our app
 
+// Simple script loader from npm
+// https://npmjs.org/package/scriptjs
 var $script = require("scriptjs").$script;
 
 // Scripts to load
@@ -13,7 +15,7 @@ window.USE_ZEPTO = !!document.querySelectorAll;
 if (window.USE_ZEPTO) scripts.push("bundle/main-zepto.js");
 else scripts.push("bundle/main-jquery.js");
 
-// Load both scripts in parallel. We don't need to use callback here because
-// the main bundles are entry points. They will be executed soon as they are
-// loaded or after adding the es5-shim.
+// Load both scripts in parallel. We don't need to use the callback here
+// because the main bundles are entry points. They will be executed soon as
+// they are loaded or after adding the es5-shim.
 $script(scripts);

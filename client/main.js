@@ -15,7 +15,7 @@ $(".counter-container").html(counter.el);
 counter.render();
 
 
-// When graph is asked for the first time use $script the load the graph
+// When graph is asked for the first time use $script.js the load the graph
 // bundle.
 var graphContainer = $(".graph-container");
 counter.once("toggle:graph", function() {
