@@ -33,8 +33,8 @@ mainJQuery.external("./client/vendor/zepto");
     b.transform(require("hbsfy"));
 });
 
-// Remove code from main bundles that is shared with the index bundle (mainly
-// $script.js)
+// Remove code from main bundles that is shared with the index bundle
+// ($script.js)
 externalize(index, [mainJQuery, mainZepto], function(err) {
   if (err) throw err;
 
