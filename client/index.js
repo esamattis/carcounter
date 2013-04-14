@@ -6,7 +6,7 @@ var $script = require("scriptjs").$script;
 var scripts = [];
 
 // If Function.prototype.bind is missing load es5-shim
-if (!Function.prototype.bind) scripts.push("scripts/vendor/es5-shim.js");
+if (!Function.prototype.bind) scripts.push("client/vendor/es5-shim.js");
 
 // if we have querySelectorAll we can safely use Zepto version of the bundle
 window.USE_ZEPTO = !!document.querySelectorAll;
