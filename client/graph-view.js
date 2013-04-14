@@ -2,7 +2,9 @@
 var $ = require("./jquery-or-zepto");
 var Backbone = require("backbone");
 var _ = require("underscore");
+// http://momentjs.com/
 var moment = require("moment");
+// http://code.shutterstock.com/rickshaw/
 var Rickshaw = require("./vendor/rickshaw");
 
 var GraphView = Backbone.View.extend({
