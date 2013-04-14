@@ -9989,7 +9989,7 @@ var GraphView = Backbone.View.extend({
 
 module.exports = GraphView;
 
-},{"./jquery-or-zepto":"/home/epeli/code/cssfy/scripts/jquery-or-zepto.js","./vendor/rickshaw":3,"underscore":"/home/epeli/code/cssfy/node_modules/underscore/underscore.js","backbone":"/home/epeli/code/cssfy/node_modules/backbone/backbone.js","moment":4}],4:[function(require,module,exports){
+},{"./vendor/rickshaw":3,"./jquery-or-zepto":"/home/epeli/code/cssfy/scripts/jquery-or-zepto.js","underscore":"/home/epeli/code/cssfy/node_modules/underscore/underscore.js","moment":4,"backbone":"/home/epeli/code/cssfy/node_modules/backbone/backbone.js"}],4:[function(require,module,exports){
 (function(){// moment.js
 // version : 2.0.0
 // author : Tim Wood

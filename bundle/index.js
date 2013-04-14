@@ -1,25 +1,6 @@
-;(function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({1:[function(require,module,exports){
-// Preloading entry point for our app
-
-var $script = require("scriptjs").$script;
-
-// Scripts to load
-var scripts = [];
-
-// If Function.prototype.bind is missing load es5-shim
-if (!Function.prototype.bind) scripts.push("scripts/vendor/es5-shim.js");
-
-// if we have querySelectorAll we can safely use Zepto version of the bundle
-window.USE_ZEPTO = !!document.querySelectorAll;
-if (window.USE_ZEPTO) scripts.push("bundle/main-zepto.js");
-else scripts.push("bundle/main-jquery.js");
-
-// Load both scripts in parallel. We don't need to use callback here because
-// the main bundles are entry points. They will be executed soon as they are
-// loaded or after adding es5-shim.
-$script(scripts);
-
-},{"scriptjs":2}],2:[function(require,module,exports){
+require=(function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({"/home/epeli/code/cssfy/node_modules/scriptjs/dist/script.js":[function(require,module,exports){
+module.exports=require('/home/epeli/code/cssfy/node_modules/scriptjs/dist/script.js');
+},{}],"/home/epeli/code/cssfy/node_modules/scriptjs/dist/script.js":[function(require,module,exports){
 /*!
   * $script.js Async loader & dependency manager
   * https://github.com/ded/script.js
@@ -132,5 +113,26 @@ $script(scripts);
   }
   return $script
 }, this);
-},{}]},{},[1])
+},{}],1:[function(require,module,exports){
+// Preloading entry point for our app
+
+var $script = require("scriptjs").$script;
+
+// Scripts to load
+var scripts = [];
+
+// If Function.prototype.bind is missing load es5-shim
+if (!Function.prototype.bind) scripts.push("scripts/vendor/es5-shim.js");
+
+// if we have querySelectorAll we can safely use Zepto version of the bundle
+window.USE_ZEPTO = !!document.querySelectorAll;
+if (window.USE_ZEPTO) scripts.push("bundle/main-zepto.js");
+else scripts.push("bundle/main-jquery.js");
+
+// Load both scripts in parallel. We don't need to use callback here because
+// the main bundles are entry points. They will be executed soon as they are
+// loaded or after adding the es5-shim.
+$script(scripts);
+
+},{"scriptjs":"/home/epeli/code/cssfy/node_modules/scriptjs/dist/script.js"}]},{},[1])
 ;

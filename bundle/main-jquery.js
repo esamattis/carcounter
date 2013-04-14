@@ -10836,17 +10836,24 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
 },{}],"/home/epeli/code/cssfy/scripts/jquery-or-zepto.js":[function(require,module,exports){
 module.exports=require('/home/epeli/code/cssfy/scripts/jquery-or-zepto.js');
 },{}],"/home/epeli/code/cssfy/scripts/jquery-or-zepto.js":[function(require,module,exports){
-
+(function(){// In index.js we set the USE_ZEPTO global. We use that to detect in which
+// bundle we are now in.
 if (window.USE_ZEPTO) {
-    require("./vendor/zepto.js");
+    // in Zepto bundle only the zepto require will work
+    require("./vendor/zepto");
     module.exports = window.Zepto;
 }
 else {
-    require("./vendor/jquery.js");
+    // and in jquery bundle on the jquery require
+    require("./vendor/jquery");
     module.exports = window.jQuery;
 }
 
-},{"./vendor/zepto.js":"/home/epeli/code/cssfy/scripts/vendor/zepto.js","./vendor/jquery.js":"/home/epeli/code/cssfy/scripts/vendor/jquery.js"}],"d3":[function(require,module,exports){
+// Both jQuery and Zepto expose only a global variable. So we have to use
+// window global to get the export.
+
+})()
+},{"./vendor/jquery":"/home/epeli/code/cssfy/scripts/vendor/jquery.js","./vendor/zepto":"/home/epeli/code/cssfy/scripts/vendor/zepto.js"}],"d3":[function(require,module,exports){
 module.exports=require('/home/epeli/code/cssfy/scripts/vendor/d3.shim.js');
 },{}],"/home/epeli/code/cssfy/node_modules/backbone/backbone.js":[function(require,module,exports){
 module.exports=require('/home/epeli/code/cssfy/node_modules/backbone/backbone.js');
@@ -12425,10 +12432,10 @@ module.exports=require('/home/epeli/code/cssfy/node_modules/backbone/backbone.js
 
 })()
 },{"underscore":"/home/epeli/code/cssfy/node_modules/underscore/underscore.js"}],1:[function(require,module,exports){
-var $ = require("./jquery-or-zepto");
 var Backbone = require("backbone");
 var CounterView = require("./counter-view");
 var $script = require("scriptjs").$script;
+var $ = require("./jquery-or-zepto");
 
 var collection = new Backbone.Collection();
 var counter = new CounterView({
@@ -12438,16 +12445,25 @@ var counter = new CounterView({
 $(".counter-container").html(counter.el);
 counter.render();
 
+
 // When graph is asked for the first time use $script the load the graph
-// bundle.  The toggle-graph require will work only after the bundle is loaded.
+// bundle.
+var graphContainer = $(".graph-container");
 counter.once("toggle:graph", function() {
+  // Display loading indicator while the graph bundle is being downloaded.
+  graphContainer.text("loading..."); 
+
+  // The toggle-graph require will work only after the bundle is loaded. Use
+  // the callback to detect when the loading has finished.
   $script("bundle/graph.js", function(err) {
     if (err) throw err;
     var toggleGraphFor = require("./toggle-graph");
+
     // Create graph toggler for the "toggle:graph" event after we have loaded
     // it
-    var toggler = toggleGraphFor(collection, $(".graph-container"));
+    var toggler = toggleGraphFor(collection, graphContainer);
     counter.on("toggle:graph", toggler);
+
     // Display graph on the first request too
     toggler();
   });
@@ -12455,120 +12471,7 @@ counter.once("toggle:graph", function() {
 
 
 
-},{"./counter-view":2,"./jquery-or-zepto":"/home/epeli/code/cssfy/scripts/jquery-or-zepto.js","./toggle-graph":"/home/epeli/code/cssfy/scripts/toggle-graph.js","scriptjs":3,"backbone":"/home/epeli/code/cssfy/node_modules/backbone/backbone.js"}],3:[function(require,module,exports){
-/*!
-  * $script.js Async loader & dependency manager
-  * https://github.com/ded/script.js
-  * (c) Dustin Diaz, Jacob Thornton 2011
-  * License: MIT
-  */
-(function (name, definition, context) {
-  if (typeof context['module'] != 'undefined' && context['module']['exports']) context['module']['exports'] = definition()
-  else if (typeof context['define'] != 'undefined' && context['define'] == 'function' && context['define']['amd']) define(name, definition)
-  else context[name] = definition()
-})('$script', function () {
-  var doc = document
-    , head = doc.getElementsByTagName('head')[0]
-    , validBase = /^https?:\/\//
-    , list = {}, ids = {}, delay = {}, scriptpath
-    , scripts = {}, s = 'string', f = false
-    , push = 'push', domContentLoaded = 'DOMContentLoaded', readyState = 'readyState'
-    , addEventListener = 'addEventListener', onreadystatechange = 'onreadystatechange'
-
-  function every(ar, fn) {
-    for (var i = 0, j = ar.length; i < j; ++i) if (!fn(ar[i])) return f
-    return 1
-  }
-  function each(ar, fn) {
-    every(ar, function(el) {
-      return !fn(el)
-    })
-  }
-
-  if (!doc[readyState] && doc[addEventListener]) {
-    doc[addEventListener](domContentLoaded, function fn() {
-      doc.removeEventListener(domContentLoaded, fn, f)
-      doc[readyState] = 'complete'
-    }, f)
-    doc[readyState] = 'loading'
-  }
-
-  function $script(paths, idOrDone, optDone) {
-    paths = paths[push] ? paths : [paths]
-    var idOrDoneIsDone = idOrDone && idOrDone.call
-      , done = idOrDoneIsDone ? idOrDone : optDone
-      , id = idOrDoneIsDone ? paths.join('') : idOrDone
-      , queue = paths.length
-    function loopFn(item) {
-      return item.call ? item() : list[item]
-    }
-    function callback() {
-      if (!--queue) {
-        list[id] = 1
-        done && done()
-        for (var dset in delay) {
-          every(dset.split('|'), loopFn) && !each(delay[dset], loopFn) && (delay[dset] = [])
-        }
-      }
-    }
-    setTimeout(function () {
-      each(paths, function (path) {
-        if (scripts[path]) {
-          id && (ids[id] = 1)
-          return scripts[path] == 2 && callback()
-        }
-        scripts[path] = 1
-        id && (ids[id] = 1)
-        create(!validBase.test(path) && scriptpath ? scriptpath + path + '.js' : path, callback)
-      })
-    }, 0)
-    return $script
-  }
-
-  function create(path, fn) {
-    var el = doc.createElement('script')
-      , loaded = f
-    el.onload = el.onerror = el[onreadystatechange] = function () {
-      if ((el[readyState] && !(/^c|loade/.test(el[readyState]))) || loaded) return;
-      el.onload = el[onreadystatechange] = null
-      loaded = 1
-      scripts[path] = 2
-      fn()
-    }
-    el.async = 1
-    el.src = path
-    head.insertBefore(el, head.firstChild)
-  }
-
-  $script.get = create
-
-  $script.order = function (scripts, id, done) {
-    (function callback(s) {
-      s = scripts.shift()
-      if (!scripts.length) $script(s, id, done)
-      else $script(s, callback)
-    }())
-  }
-
-  $script.path = function (p) {
-    scriptpath = p
-  }
-  $script.ready = function (deps, ready, req) {
-    deps = deps[push] ? deps : [deps]
-    var missing = [];
-    !each(deps, function (dep) {
-      list[dep] || missing[push](dep);
-    }) && every(deps, function (dep) {return list[dep]}) ?
-      ready() : !function (key) {
-      delay[key] = delay[key] || []
-      delay[key][push](ready)
-      req && req(missing)
-    }(deps.join('|'))
-    return $script
-  }
-  return $script
-}, this);
-},{}],2:[function(require,module,exports){
+},{"./jquery-or-zepto":"/home/epeli/code/cssfy/scripts/jquery-or-zepto.js","./counter-view":2,"./toggle-graph":"/home/epeli/code/cssfy/scripts/toggle-graph.js","backbone":"/home/epeli/code/cssfy/node_modules/backbone/backbone.js","scriptjs":"/home/epeli/code/cssfy/node_modules/scriptjs/dist/script.js"}],2:[function(require,module,exports){
 
 var Backbone = require("backbone");
 var template = require("./counter.hbs");
@@ -12599,7 +12502,7 @@ var CounterView = Backbone.View.extend({
 
 module.exports = CounterView;
 
-},{"./counter.hbs":4,"backbone":"/home/epeli/code/cssfy/node_modules/backbone/backbone.js"}],4:[function(require,module,exports){
+},{"./counter.hbs":3,"backbone":"/home/epeli/code/cssfy/node_modules/backbone/backbone.js"}],3:[function(require,module,exports){
 var Handlebars = require('handlebars-runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
@@ -12615,7 +12518,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   return buffer;
   });
 
-},{"handlebars-runtime":5}],5:[function(require,module,exports){
+},{"handlebars-runtime":4}],4:[function(require,module,exports){
 /*
 
 Copyright (C) 2011 by Yehuda Katz
