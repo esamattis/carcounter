@@ -11,6 +11,7 @@ min:
 	uglifyjs bundle/graph.js -o bundle/graph.js --mangle
 
 serve:
+	@echo http://localhost:3000/
 	serve .
 
 watch:
