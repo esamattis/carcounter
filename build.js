@@ -23,7 +23,7 @@ mainJQuery.external("./client/vendor/zepto");
 
 // Common settings for main and graph bundles
 [mainZepto, mainJQuery, graph].forEach(function(b) {
-    // Rickshaw (the graph lib) distribution is bit weird. It has a require
+    // Rickshaw (the graph lib) distribution is a bit weird. It has a require
     // call to "d3". We need to make that work in all bundles using so that the
     // dependency graphs can be resolved. In the end only the graph bundle will
     // have the code for the d3 library.
