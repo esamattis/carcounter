@@ -1,6 +1,6 @@
 var fs = require("fs");
 var browserify = require("browserify");
-var externalize = require("browserify-externalize");
+var externalize = require("externalize");
 
 // Index bundle. The application excution starts from here (index.js)
 var index = browserify("./client/index");
