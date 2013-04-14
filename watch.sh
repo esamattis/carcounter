@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Simple watch tool
+# Homepage https://gist.github.com/epeli/5233969/
+
 # Deps:
 # sudo apt-get install inotify-tools
 
