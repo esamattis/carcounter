@@ -7,6 +7,8 @@ var moment = require("moment");
 // http://code.shutterstock.com/rickshaw/
 var Rickshaw = require("./vendor/rickshaw");
 
+var template = require("./templates/graph.hbs");
+
 var GraphView = Backbone.View.extend({
 
   constructor: function() {
@@ -21,6 +23,8 @@ var GraphView = Backbone.View.extend({
 
 
   render: function() {
+    this.$el.html(template());
+    var container = this.$(".graph");
 
     var data = [];
     var count = 0;
@@ -33,14 +37,12 @@ var GraphView = Backbone.View.extend({
     });
 
     if (!data.length) {
-      this.$el.html("no data!");
+      container.html("<i>no data!</i>");
       return;
     }
 
-    this.$el.empty();
-
     var graph = new Rickshaw.Graph( {
-      element: this.el,
+      element: container[0],
       renderer: 'line',
       series: [
         {

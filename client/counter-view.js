@@ -1,6 +1,6 @@
 
 var Backbone = require("backbone");
-var template = require("./counter.hbs");
+var template = require("./templates/counter.hbs");
 
 var CounterView = Backbone.View.extend({
 
