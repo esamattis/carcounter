@@ -12,4 +12,4 @@ else {
 }
 
 // Both jQuery and Zepto expose only a global variable. So we have to use
-// window global to get the export.
+// the window global to get the export.
