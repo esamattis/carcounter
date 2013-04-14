@@ -1,7 +1,10 @@
-var Backbone = require("backbone");
-var CounterView = require("./counter-view");
-var $script = require("scriptjs").$script;
+// Here it is important that jQuery or Zepto is required before Backbone is
+// required because Backbone requires a global of one or the other
 var $ = require("./jquery-or-zepto");
+var Backbone = require("backbone");
+var $script = require("scriptjs").$script;
+
+var CounterView = require("./counter-view");
 
 var collection = new Backbone.Collection();
 var counter = new CounterView({
@@ -17,7 +20,7 @@ counter.render();
 var graphContainer = $(".graph-container");
 counter.once("toggle:graph", function() {
   // Display loading indicator while the graph bundle is being downloaded.
-  graphContainer.text("loading..."); 
+  graphContainer.text("loading...");
 
   // The toggle-graph require will work only after the bundle is loaded. Use
   // the callback to detect when the loading has finished.
