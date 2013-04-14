@@ -9921,6 +9921,8 @@ var moment = require("moment");
 // http://code.shutterstock.com/rickshaw/
 var Rickshaw = require("./vendor/rickshaw");
 
+var template = require("./templates/graph.hbs");
+
 var GraphView = Backbone.View.extend({
 
   constructor: function() {
@@ -9935,6 +9937,8 @@ var GraphView = Backbone.View.extend({
 
 
   render: function() {
+    this.$el.html(template());
+    var container = this.$(".graph");
 
     var data = [];
     var count = 0;
@@ -9947,14 +9951,12 @@ var GraphView = Backbone.View.extend({
     });
 
     if (!data.length) {
-      this.$el.html("no data!");
+      container.html("<i>no data!</i>");
       return;
     }
 
-    this.$el.empty();
-
     var graph = new Rickshaw.Graph( {
-      element: this.el,
+      element: container[0],
       renderer: 'line',
       series: [
         {
@@ -9991,7 +9993,7 @@ var GraphView = Backbone.View.extend({
 
 module.exports = GraphView;
 
-},{"./jquery-or-zepto":"jWFJGL","./vendor/rickshaw":3,"backbone":"WPCV2g","moment":4,"underscore":"GwUPXS"}],4:[function(require,module,exports){
+},{"./templates/graph.hbs":4,"./jquery-or-zepto":"jWFJGL","./vendor/rickshaw":3,"moment":5,"backbone":"WPCV2g","underscore":"GwUPXS"}],5:[function(require,module,exports){
 (function(){// moment.js
 // version : 2.0.0
 // author : Tim Wood
@@ -11394,5 +11396,16 @@ module.exports = GraphView;
 }).call(this);
 
 })()
-},{}]},{},[])
+},{}],4:[function(require,module,exports){
+var Handlebars = require('handlebars-runtime');
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  
+
+
+  return "<h2>History</h2>\n<p>Graph of cars you've seen :)</p>\n<div class=graph></div>\n";
+  });
+
+},{"handlebars-runtime":"mm61Yv"}]},{},[])
 ;
