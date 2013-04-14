@@ -15,5 +15,5 @@ else scripts.push("bundle/main-jquery.js");
 
 // Load both scripts in parallel. We don't need to use callback here because
 // the main bundles are entry points. They will be executed soon as they are
-// loaded or after adding es5-shim.
+// loaded or after adding the es5-shim.
 $script(scripts);

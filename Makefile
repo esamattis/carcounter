@@ -1,8 +1,6 @@
 
 export PATH := node_modules/.bin:$(PATH)
 
-all: build
-
 build:
 	node build.js
 
@@ -15,7 +13,7 @@ serve:
 	serve .
 
 watch:
-	./watch.sh make all
+	./watch.sh make
 
 clean:
 	rm bundle/*
