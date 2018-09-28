@@ -1,5 +1,7 @@
 # Car Counter
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/epeli/carcounter.svg)](https://greenkeeper.io/)
+
 Asynchronous module loading example with Browserify.
 
 Blog post
