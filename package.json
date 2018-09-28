@@ -13,16 +13,16 @@
   "author": "Esa-Matti Suuronen",
   "license": "MIT",
   "dependencies": {
-    "browserify": "~2.12.0",
-    "backbone": "~1.0.0",
+    "browserify": "~16.2.3",
+    "backbone": "~1.3.3",
     "underscore": "",
-    "scriptjs": "~2.2.6",
+    "scriptjs": "~2.5.8",
     "handlebars-runtime": "~1.0.0",
-    "hbsfy": "~0.1.1",
-    "uglify-js": "~2.2.5",
+    "hbsfy": "~2.8.1",
+    "uglify-js": "~3.4.9",
     "browserify-externalize": "",
-    "moment": "~2.0.0",
-    "serve": "~1.2.0",
+    "moment": "~2.22.2",
+    "serve": "~10.0.2",
     "externalize": "~0.1.0"
   }
 }
